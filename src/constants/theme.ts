@@ -7,18 +7,26 @@ export const ROOM_TYPES = [
 ];
 
 export const DESIGN_STYLES = [
-  { id: 'modern', label: 'Modern', description: 'Clean lines and bold colors' },
-  { id: 'minimalist', label: 'Minimalist', description: 'Simple and clutter-free' },
-  { id: 'industrial', label: 'Industrial', description: 'Raw and urban look' },
-  { id: 'bohemian', label: 'Bohemian', description: 'Eclectic and colorful' },
-  { id: 'scandinavian', label: 'Scandinavian', description: 'Cozy and functional' },
+  { id: 'modern', label: 'Modern', description: 'Keskin hatlar, cesur renkler' },
+  { id: 'minimalist', label: 'Minimalist', description: 'Sade ve huzurlu bir alan' },
+  { id: 'industrial', label: 'Industrial', description: 'Ham ve kentsel görünüm' },
+  { id: 'bohemian', label: 'Bohemian', description: 'Eklektik ve renkli' },
+  { id: 'scandinavian', label: 'Scandinavian', description: 'Fonksiyonel ve sıcak' },
 ];
 
 export const COLORS = {
-  background: '#050505',
-  card: '#0F0F0F',
-  accent: '#8B5CF6', // Purple
-  gold: '#D4AF37',
-  text: '#FFFFFF',
-  textMuted: '#A0A0A0',
+  background: '#000000',
+  card: '#0A0A0A',
+  primary: '#8B5CF6', // Vivid Purple
+  secondary: '#D4AF37', // Gold
+  accent: '#A78BFA',
+  gold: '#F59E0B',
+  white: '#FFFFFF',
+  gray: {
+    100: '#F3F4F6',
+    400: '#9CA3AF',
+    600: '#4B5563',
+    800: '#1F2937',
+    900: '#111827',
+  }
 };

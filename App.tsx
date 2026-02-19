@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native';
-import "./src/styles/global.css";
+import { SafeAreaView, View } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 
 export default function App() {
   return (
-    <SafeAreaView className="flex-1 bg-black">
-      <HomeScreen />
+    <View className="flex-1 bg-black">
+      <SafeAreaView className="flex-1">
+        <HomeScreen />
+      </SafeAreaView>
       <StatusBar style="light" />
-    </SafeAreaView>
+    </View>
   );
 }
