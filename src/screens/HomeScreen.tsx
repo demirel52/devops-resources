@@ -9,8 +9,11 @@ import { useDesignStore } from '../store/useDesignStore';
 import { aiService } from '../services/aiService';
 import { imageToBase64 } from '../utils/imageUtils';
 import { SelectionCard } from '../components/SelectionCard';
+import { useNavigation } from '@react-navigation/native';
+import { LoadingOverlay } from '../components/LoadingOverlay';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   const {
     originalImage, setOriginalImage,
     roomType, setRoomType,
@@ -75,8 +78,17 @@ const HomeScreen = () => {
         style
       });
 
-      console.log('Prediction started:', response.id);
-      Alert.alert('Tasarım Başlatıldı', 'Yapay zeka odanızı tasarlamaya başladı. Bu işlem yaklaşık 30-60 saniye sürebilir.');
+      // Poll for result
+      const resultUrl = await aiService.waitForPrediction(response.id);
+
+      setGenerating(false);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
+      // Navigate to Result Screen
+      (navigation as any).navigate('Result', {
+        originalImage: originalImage,
+        generatedImage: resultUrl
+      });
 
     } catch (err: any) {
       setError(err.message);
@@ -87,10 +99,12 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScrollView
-      className="flex-1 bg-black pt-12 px-6"
-      showsVerticalScrollIndicator={false}
-    >
+    <View className="flex-1 bg-black">
+      <LoadingOverlay isVisible={isGenerating} />
+      <ScrollView
+        className="flex-1 pt-12 px-6"
+        showsVerticalScrollIndicator={false}
+      >
       {/* Header */}
       <MotiView
         from={{ opacity: 0, translateY: -20 }}
@@ -261,6 +275,7 @@ const HomeScreen = () => {
         )}
       </TouchableOpacity>
     </ScrollView>
+    </View>
   );
 };
 
